@@ -3,271 +3,264 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="ASCAPCT - Engineering Intelligence. Building Systems That Endure.">
-    <title>ASCAPCT - Engineering Intelligence</title>
+    <title>ASCAPcT</title>
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    <link rel="stylesheet" href="style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: #0a0a0a;
+            color: #ffffff;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(102, 126, 234, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(118, 75, 162, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .container {
+            text-align: center;
+            padding: 2rem;
+            max-width: 900px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .subtitle {
+            font-size: 1rem;
+            font-weight: 400;
+            color: #888;
+            margin-bottom: 3rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .timeline-badges {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1.2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .badge:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(102, 126, 234, 0.3);
+        }
+
+        .badge-icon {
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        footer {
+            padding: 1.5rem;
+            text-align: center;
+            font-size: 0.813rem;
+            opacity: 0.5;
+            width: 100%;
+            position: relative;
+            z-index: 1;
+        }
+
+        footer p {
+            margin: 0.25rem 0;
+            font-size: 0.813rem;
+            color: #888;
+        }
+
+        h1 {
+            font-size: 4.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #ffffff 0%, #a0a0a0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .tagline {
+            font-size: 1.25rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+            color: #b0b0b0;
+            line-height: 1.6;
+        }
+
+        .domain-info {
+            display: inline-block;
+            margin-bottom: 2.5rem;
+            padding: 1.2rem 1.8rem;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .domain-info p {
+            font-size: 0.875rem;
+            margin: 0.25rem 0;
+            color: #999;
+        }
+
+        .domain-info strong {
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.875rem 2rem;
+            font-size: 1rem;
+            font-weight: 500;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #ffffff;
+            border-color: transparent;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #7c8ef0 0%, #8a5bb0 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #ffffff;
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .tagline {
+                font-size: 1rem;
+            }
+            
+            .timeline-badges {
+                gap: 0.75rem;
+            }
+
+            .badge {
+                font-size: 0.75rem;
+                padding: 0.4rem 0.75rem;
+            }
+            
+            .domain-info {
+                padding: 0.75rem 1rem;
+            }
+
+            .domain-info p {
+                font-size: 0.75rem;
+            }
+            
+            .buttons {
+                flex-direction: column;
+            }
+
+            footer {
+                font-size: 0.75rem;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="nav">
-        <div class="nav-container">
-            <div class="nav-logo">ASCAPCT</div>
-            <div class="nav-links">
-                <a href="#about">About</a>
-                <a href="#domains">Domains</a>
-                <a href="#values">Values</a>
-                <a href="#contact" class="nav-cta">Contact</a>
+    <div class="container">
+        <h1>ASCAPcT</h1>
+        <p class="subtitle">Venture Capital</p>
+        <p class="tagline">Building tomorrow's enterprises through strategic investments and innovation.</p>
+        
+        <div class="timeline-badges">
+            <div class="badge">
+                <span class="badge-icon">🏆</span>
+                <span>7+ Years Strong</span>
             </div>
-            <button class="nav-toggle" aria-label="Toggle navigation">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section class="hero" id="hero">
-        <div class="hero-content">
-            <div class="hero-badge">Est. 2018</div>
-            <h1 class="hero-title">ASCAPCT</h1>
-            <p class="hero-tagline">Engineering Intelligence. Building Systems That Endure.</p>
-            <p class="hero-subtitle">A technical research unit focused on infrastructure, computation, and high-performance systems.</p>
-            <div class="hero-actions">
-                <a href="#domains" class="btn btn-primary">Explore</a>
-                <a href="#contact" class="btn btn-secondary">Contact</a>
+            <div class="badge">
+                <span class="badge-icon">✓</span>
+                <span>Trusted Since 2018</span>
+            </div>
+            <div class="badge">
+                <span class="badge-icon">🔒</span>
+                <span>Lifetime Secured</span>
             </div>
         </div>
-        <div class="hero-decoration"></div>
-    </section>
-
-    <!-- About Section -->
-    <section class="about" id="about">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-label">About</span>
-                <h2 class="section-title">Engineering at Scale</h2>
-            </div>
-            <div class="about-content">
-                <p class="about-text">
-                    ASCAPCT is a technical engineering organization dedicated to building robust, scalable systems 
-                    that operate at the intersection of infrastructure and computation. Founded in 2018, we focus 
-                    on foundational technologies that power modern distributed systems, with particular emphasis on 
-                    performance, reliability, and security.
-                </p>
-                <p class="about-text">
-                    Our work spans low-level systems programming, AI infrastructure, protocol design, and computational 
-                    research. We build tools and frameworks that enable next-generation applications while maintaining 
-                    the highest standards of technical rigor.
-                </p>
-                <div class="about-stats">
-                    <div class="stat">
-                        <div class="stat-number">7+</div>
-                        <div class="stat-label">Years Operating</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-number">∞</div>
-                        <div class="stat-label">Lifetime Secured</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-number">100%</div>
-                        <div class="stat-label">Technical Focus</div>
-                    </div>
-                </div>
-            </div>
+        
+        <div class="domain-info">
+            <p><strong>Established February 23, 2018</strong></p>
+            <p>ascapct.com • Secured for Lifetime</p>
         </div>
-    </section>
 
-    <!-- Domains Section -->
-    <section class="domains" id="domains">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-label">Domains</span>
-                <h2 class="section-title">Areas of Expertise</h2>
-            </div>
-            <div class="domains-grid">
-                <div class="domain-card">
-                    <div class="domain-icon">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
-                            <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
-                            <line x1="6" y1="6" x2="6.01" y2="6"></line>
-                            <line x1="6" y1="18" x2="6.01" y2="18"></line>
-                        </svg>
-                    </div>
-                    <h3 class="domain-title">Systems Engineering</h3>
-                    <p class="domain-description">
-                        Building resilient distributed systems, data infrastructure, and low-latency pipelines 
-                        that operate at scale with predictable performance characteristics.
-                    </p>
-                </div>
-
-                <div class="domain-card">
-                    <div class="domain-icon">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="12" cy="12" r="10"></circle>
-                            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
-                            <path d="M2 12h20"></path>
-                        </svg>
-                    </div>
-                    <h3 class="domain-title">AI Infrastructure</h3>
-                    <p class="domain-description">
-                        Designing compute frameworks, training pipelines, and inference systems for machine learning 
-                        workloads requiring deterministic behavior and efficient resource utilization.
-                    </p>
-                </div>
-
-                <div class="domain-card">
-                    <div class="domain-icon">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-                            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-                        </svg>
-                    </div>
-                    <h3 class="domain-title">Security & Protocols</h3>
-                    <p class="domain-description">
-                        Implementing cryptographic primitives, secure communication protocols, and zero-trust 
-                        architectures for systems operating in adversarial environments.
-                    </p>
-                </div>
-
-                <div class="domain-card">
-                    <div class="domain-icon">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
-                            <polyline points="7.5 4.21 12 6.81 16.5 4.21"></polyline>
-                            <polyline points="7.5 19.79 7.5 14.6 3 12"></polyline>
-                            <polyline points="21 12 16.5 14.6 16.5 19.79"></polyline>
-                            <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
-                            <line x1="12" y1="22.08" x2="12" y2="12"></line>
-                        </svg>
-                    </div>
-                    <h3 class="domain-title">Research & Computation</h3>
-                    <p class="domain-description">
-                        Advancing computational methods, algorithm design, and system optimization techniques 
-                        through rigorous research and empirical validation.
-                    </p>
-                </div>
-            </div>
+        <div class="buttons">
+            <a href="/portfolio/" class="btn btn-primary">Our Portfolio</a>
+            <a href="/contact/" class="btn btn-secondary">Contact Us</a>
         </div>
-    </section>
-
-    <!-- Values Section -->
-    <section class="values" id="values">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-label">Principles</span>
-                <h2 class="section-title">Core Values</h2>
-            </div>
-            <div class="values-grid">
-                <div class="value-card">
-                    <div class="value-number">01</div>
-                    <h3 class="value-title">Precision</h3>
-                    <p class="value-description">
-                        Every line of code, every system design decision is deliberate. We measure twice, 
-                        build once, and optimize relentlessly.
-                    </p>
-                </div>
-                <div class="value-card">
-                    <div class="value-number">02</div>
-                    <h3 class="value-title">Reliability</h3>
-                    <p class="value-description">
-                        Systems must work under adversity. We build with fault tolerance, graceful degradation, 
-                        and operational excellence as first principles.
-                    </p>
-                </div>
-                <div class="value-card">
-                    <div class="value-number">03</div>
-                    <h3 class="value-title">Minimalism</h3>
-                    <p class="value-description">
-                        Complexity is the enemy of reliability. We favor simple, composable components over 
-                        monolithic abstractions.
-                    </p>
-                </div>
-                <div class="value-card">
-                    <div class="value-number">04</div>
-                    <h3 class="value-title">Engineering Excellence</h3>
-                    <p class="value-description">
-                        Technical merit above all else. We prioritize substance over appearance, performance 
-                        over convenience, and correctness over speed.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section class="contact" id="contact">
-        <div class="container">
-            <div class="contact-content">
-                <div class="contact-info">
-                    <h2 class="contact-title">Get in Touch</h2>
-                    <p class="contact-description">
-                        For technical inquiries, collaboration opportunities, or research partnerships.
-                    </p>
-                    <div class="contact-details">
-                        <div class="contact-item">
-                            <span class="contact-label">Email</span>
-                            <a href="mailto:contact@ascapct.com" class="contact-link">contact@ascapct.com</a>
-                        </div>
-                        <div class="contact-item">
-                            <span class="contact-label">Status</span>
-                            <span class="contact-value">Operational Since 2018</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="contact-form-container">
-                    <!-- TODO: Add contact form with backend integration -->
-                    <div class="contact-placeholder">
-                        <p>Contact form coming soon.</p>
-                        <p class="contact-placeholder-sub">For now, reach out via email.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-brand">
-                    <div class="footer-logo">ASCAPCT</div>
-                    <p class="footer-tagline">Engineering Intelligence</p>
-                </div>
-                <div class="footer-links">
-                    <div class="footer-column">
-                        <h4 class="footer-heading">Resources</h4>
-                        <a href="#" class="footer-link">Documentation</a>
-                        <a href="#" class="footer-link">Research Papers</a>
-                        <a href="#" class="footer-link">Technical Blog</a>
-                    </div>
-                    <div class="footer-column">
-                        <h4 class="footer-heading">Company</h4>
-                        <a href="#about" class="footer-link">About</a>
-                        <a href="#domains" class="footer-link">Domains</a>
-                        <a href="#contact" class="footer-link">Contact</a>
-                    </div>
-                    <div class="footer-column">
-                        <h4 class="footer-heading">Legal</h4>
-                        <a href="#" class="footer-link">Privacy Policy</a>
-                        <a href="#" class="footer-link">Terms of Service</a>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p class="footer-copyright">© 2018-2025 ASCAPCT. All rights reserved.</p>
-                <p class="footer-note">Built with precision. Operated with care.</p>
-            </div>
-        </div>
+    </div>
+    
+    <footer>
+        <p>A trusted name since February 2018</p>
+        <p>© 2018-2025 ASCAPcT. All rights reserved.</p>
     </footer>
-
-    <!-- TODO: Add blog system -->
-    <!-- TODO: Add research library -->
-    <!-- TODO: Add API documentation portal -->
-    <!-- TODO: Connect to future backend -->
-
-    <script src="app.js"></script>
 </body>
 </html>
