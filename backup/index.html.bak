@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASCAPcT</title>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: #0a0a0a;
+            color: #ffffff;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(102, 126, 234, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(118, 75, 162, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .container {
+            text-align: center;
+            padding: 2rem;
+            max-width: 900px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .subtitle {
+            font-size: 1rem;
+            font-weight: 400;
+            color: #888;
+            margin-bottom: 3rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .timeline-badges {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1.2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .badge:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(102, 126, 234, 0.3);
+        }
+
+        .badge-icon {
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        footer {
+            padding: 1.5rem;
+            text-align: center;
+            font-size: 0.813rem;
+            opacity: 0.5;
+            width: 100%;
+            position: relative;
+            z-index: 1;
+        }
+
+        footer p {
+            margin: 0.25rem 0;
+            font-size: 0.813rem;
+            color: #888;
+        }
+
+        h1 {
+            font-size: 4.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #ffffff 0%, #a0a0a0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .tagline {
+            font-size: 1.25rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+            color: #b0b0b0;
+            line-height: 1.6;
+        }
+
+        .domain-info {
+            display: inline-block;
+            margin-bottom: 2.5rem;
+            padding: 1.2rem 1.8rem;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .domain-info p {
+            font-size: 0.875rem;
+            margin: 0.25rem 0;
+            color: #999;
+        }
+
+        .domain-info strong {
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.875rem 2rem;
+            font-size: 1rem;
+            font-weight: 500;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #ffffff;
+            border-color: transparent;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #7c8ef0 0%, #8a5bb0 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #ffffff;
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .tagline {
+                font-size: 1rem;
+            }
+            
+            .timeline-badges {
+                gap: 0.75rem;
+            }
+
+            .badge {
+                font-size: 0.75rem;
+                padding: 0.4rem 0.75rem;
+            }
+            
+            .domain-info {
+                padding: 0.75rem 1rem;
+            }
+
+            .domain-info p {
+                font-size: 0.75rem;
+            }
+            
+            .buttons {
+                flex-direction: column;
+            }
+
+            footer {
+                font-size: 0.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>ASCAPcT</h1>
+        <p class="subtitle">Venture Capital</p>
+        <p class="tagline">Building tomorrow's enterprises through strategic investments and innovation.</p>
+        
+        <div class="timeline-badges">
+            <div class="badge">
+                <span class="badge-icon">🏆</span>
+                <span>7+ Years Strong</span>
+            </div>
+            <div class="badge">
+                <span class="badge-icon">✓</span>
+                <span>Trusted Since 2018</span>
+            </div>
+            <div class="badge">
+                <span class="badge-icon">🔒</span>
+                <span>Lifetime Secured</span>
+            </div>
+        </div>
+        
+        <div class="domain-info">
+            <p><strong>Established February 23, 2018</strong></p>
+            <p>ascapct.com • Secured for Lifetime</p>
+        </div>
+
+        <div class="buttons">
+            <a href="/portfolio/" class="btn btn-primary">Our Portfolio</a>
+            <a href="/contact/" class="btn btn-secondary">Contact Us</a>
+        </div>
+    </div>
+    
+    <footer>
+        <p>A trusted name since February 2018</p>
+        <p>© 2018-2025 ASCAPcT. All rights reserved.</p>
+    </footer>
+</body>
+</html>
