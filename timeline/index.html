@@ -1,1 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timeline - ASCAPcT</title>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            min-height: 100vh;
+            background: #0a0a0a;
+            color: #ffffff;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(102, 126, 234, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(118, 75, 162, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .back-link {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            color: #888;
+            text-decoration: none;
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: color 0.3s ease;
+            z-index: 100;
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .back-link:hover {
+            color: #fff;
+            border-color: rgba(102, 126, 234, 0.3);
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 5rem 2rem 3rem;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #ffffff 0%, #a0a0a0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            font-weight: 300;
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        .description {
+            font-size: 1.125rem;
+            color: #b0b0b0;
+            line-height: 1.8;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, 
+                transparent 0%,
+                rgba(102, 126, 234, 0.3) 10%,
+                rgba(102, 126, 234, 0.3) 90%,
+                transparent 100%
+            );
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            display: flex;
+            margin-bottom: 4rem;
+            position: relative;
+            opacity: 0;
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .timeline-item:nth-child(1) { animation-delay: 0.1s; }
+        .timeline-item:nth-child(2) { animation-delay: 0.2s; }
+        .timeline-item:nth-child(3) { animation-delay: 0.3s; }
+        .timeline-item:nth-child(4) { animation-delay: 0.4s; }
+        .timeline-item:nth-child(5) { animation-delay: 0.5s; }
+        .timeline-item:nth-child(6) { animation-delay: 0.6s; }
+        .timeline-item:nth-child(7) { animation-delay: 0.7s; }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .timeline-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .timeline-content {
+            flex: 1;
+            padding: 0 3rem;
+            max-width: 50%;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content {
+            text-align: right;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content {
+            text-align: left;
+        }
+
+        .timeline-marker {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            border: 4px solid #0a0a0a;
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.2);
+            z-index: 10;
+        }
+
+        .timeline-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(102, 126, 234, 0.3);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 40px rgba(102, 126, 234, 0.15);
+        }
+
+        .timeline-date {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .timeline-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #ffffff;
+        }
+
+        .timeline-description {
+            font-size: 1rem;
+            color: #b0b0b0;
+            line-height: 1.6;
+        }
+
+        .timeline-image {
+            width: 100%;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .timeline-card:hover .timeline-image {
+            border-color: rgba(102, 126, 234, 0.3);
+            transform: scale(1.02);
+        }
+
+        .milestone-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(102, 126, 234, 0.1);
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            border-radius: 20px;
+            font-size: 0.875rem;
+            margin-top: 1rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 3rem 1rem 2rem;
+            font-size: 0.875rem;
+            color: #888;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            margin-top: 5rem;
+        }
+
+        footer p {
+            margin: 0.25rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 4rem 1.5rem 2rem;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .subtitle {
+                font-size: 1.25rem;
+            }
+
+            .description {
+                font-size: 1rem;
+            }
+
+            .timeline::before {
+                left: 20px;
+            }
+
+            .timeline-item,
+            .timeline-item:nth-child(even) {
+                flex-direction: row;
+            }
+
+            .timeline-content {
+                max-width: 100%;
+                padding-left: 60px;
+                padding-right: 0;
+            }
+
+            .timeline-item:nth-child(odd) .timeline-content,
+            .timeline-item:nth-child(even) .timeline-content {
+                text-align: left;
+            }
+
+            .timeline-marker {
+                left: 20px;
+            }
+
+            .timeline-card {
+                padding: 1.5rem;
+            }
+
+            .timeline-title {
+                font-size: 1.25rem;
+            }
+
+            .back-link {
+                top: 1rem;
+                left: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="/" class="back-link">
+        <span>←</span>
+        <span>Back to Home</span>
+    </a>
+
+    <div class="container">
+        <div class="header">
+            <h1>Our Journey</h1>
+            <p class="subtitle">7+ Years of Innovation & Growth</p>
+            <p class="description">From a vision to reality, explore the key milestones that have shaped ASCAPcT into the trusted venture capital firm it is today.</p>
+        </div>
+
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <div class="timeline-card">
+                        <div class="timeline-date">February 23, 2018</div>
+                        <img src="8-2018.png" alt="ASCAPcT Foundation 2018" class="timeline-image">
+                        <h3 class="timeline-title">ASCAPcT Founded</h3>
+                        <p class="timeline-description">The journey begins. ASCAPcT.com domain secured with a vision to build tomorrow's enterprises through strategic investments and innovation.</p>
+                        <div class="milestone-badge">
+                            <span>🚀</span>
+                            <span>Foundation</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <div class="timeline-card">
+                        <div class="timeline-date">2018-2019</div>
+                        <img src="5-2019.png" alt="Building Foundation 2019" class="timeline-image">
+                        <h3 class="timeline-title">Building the Foundation</h3>
+                        <p class="timeline-description">Established core investment principles and began identifying key opportunities in emerging technology sectors.</p>
+                        <div class="milestone-badge">
+                            <span>🏗️</span>
+                            <span>Strategy Development</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <div class="timeline-card">
+                        <div class="timeline-date">2020</div>
+                        <img src="12-2021.png" alt="Portfolio Expansion 2020" class="timeline-image">
+                        <h3 class="timeline-title">First Portfolio Expansion</h3>
+                        <p class="timeline-description">Launched strategic initiatives and expanded our portfolio with carefully selected ventures focused on sustainable growth.</p>
+                        <div class="milestone-badge">
+                            <span>📈</span>
+                            <span>Growth Phase</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <div class="timeline-card">
+                        <div class="timeline-date">2021-2022</div>
+                        <img src="4-2021.png" alt="Innovation 2021" class="timeline-image">
+                        <h3 class="timeline-title">Innovation & Adaptation</h3>
+                        <p class="timeline-description">Navigated global challenges while maintaining focus on innovation. Strengthened partnerships and refined investment strategies.</p>
+                        <div class="milestone-badge">
+                            <span>💡</span>
+                            <span>Innovation</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <div class="timeline-card">
+                        <div class="timeline-date">2023</div>
+                        <img src="7-2023.png" alt="Digital Transformation 2023" class="timeline-image">
+                        <h3 class="timeline-title">Digital Transformation</h3>
+                        <p class="timeline-description">Enhanced our digital presence and investment frameworks to align with evolving market dynamics and emerging technologies.</p>
+                        <div class="milestone-badge">
+                            <span>🔄</span>
+                            <span>Transformation</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <div class="timeline-card">
+                        <div class="timeline-date">2024</div>
+                        <h3 class="timeline-title">Reaching New Heights</h3>
+                        <p class="timeline-description">Celebrated 6 years of excellence with expanded portfolio reach and strengthened commitment to fostering innovative enterprises.</p>
+                        <div class="milestone-badge">
+                            <span>🏆</span>
+                            <span>Milestone</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <div class="timeline-card">
+                        <div class="timeline-date">2025 & Beyond</div>
+                        <h3 class="timeline-title">Future Vision</h3>
+                        <p class="timeline-description">Continuing our mission to identify and nurture groundbreaking ventures. Committed to building tomorrow's success stories through strategic partnerships and investments.</p>
+                        <div class="milestone-badge">
+                            <span>✨</span>
+                            <span>Future Forward</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>A trusted name since February 2018</p>
+        <p>© 2018-2025 ASCAPcT. All rights reserved.</p>
+    </footer>
+</body>
+</html>
