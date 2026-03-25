@@ -235,7 +235,7 @@
         <div class="timeline-badges">
             <div class="badge">
                 <span class="badge-icon">🏆</span>
-                <span>7+ Years Strong</span>
+                <span id="yearsStrong"></span>
             </div>
             <div class="badge">
                 <span class="badge-icon">✓</span>
@@ -287,6 +287,7 @@
 
         document.getElementById('age').textContent = `${years} years, ${months} months, ${days} days`;
         document.getElementById('year').textContent = now.getFullYear();
+        document.getElementById('yearsStrong').textContent = `${years}+ Years Strong`;
     </script>
 </body>
 </html>
