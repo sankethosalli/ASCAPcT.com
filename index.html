@@ -261,7 +261,31 @@
     
     <footer>
         <p>A trusted name since February 2018</p>
-        <p>© 2018-2025 ASCAPcT. All rights reserved.</p>
+        <p id="age"></p>
+        <p>© 2018-<span id="year"></span> ASCAPcT. All rights reserved.</p>
     </footer>
+
+    <script>
+        const startDate = new Date('2018-02-23');
+        const now = new Date();
+
+        let years = now.getFullYear() - startDate.getFullYear();
+        let months = now.getMonth() - startDate.getMonth();
+        let days = now.getDate() - startDate.getDate();
+
+        if (days < 0) {
+            months--;
+            const prevMonth = new Date(now.getFullYear(), now.getMonth(), 0);
+            days += prevMonth.getDate();
+        }
+
+        if (months < 0) {
+            years--;
+            months += 12;
+        }
+
+        document.getElementById('age').textContent = `${years} years, ${months} months, ${days} days`;
+        document.getElementById('year').textContent = now.getFullYear();
+    </script>
 </body>
 </html>
