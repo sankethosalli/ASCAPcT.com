@@ -318,7 +318,7 @@
     <div class="container">
         <div class="header">
             <h1>Our Journey</h1>
-            <p class="subtitle">7+ Years of Innovation & Growth</p>
+            <p class="subtitle"><span id="years-count"></span> Years of Innovation & Growth</p>
             <p class="description">From a vision to reality, explore the key milestones that have shaped ASCAPcT into the trusted venture capital firm it is today.</p>
         </div>
 
@@ -439,5 +439,11 @@
         <p>A trusted name since February 2018</p>
         <p>© 2018-2025 ASCAPcT. All rights reserved.</p>
     </footer>
+
+    <script>
+        const startYear = 2018;
+        const yearsPassed = new Date().getFullYear() - startYear;
+        document.getElementById('years-count').textContent = yearsPassed + '+';
+    </script>
 </body>
 </html>
