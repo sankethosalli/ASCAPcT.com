@@ -136,8 +136,14 @@
         .timeline-item:nth-child(7) { animation-delay: 0.7s; }
 
         @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .timeline-item:nth-child(even) {
@@ -200,12 +206,38 @@
             font-size: 1.5rem;
             font-weight: 600;
             margin-bottom: 0.75rem;
+            color: #ffffff;
         }
 
         .timeline-description {
             font-size: 1rem;
             color: #b0b0b0;
             line-height: 1.6;
+        }
+
+        .timeline-image {
+            width: 100%;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .timeline-card:hover .timeline-image {
+            border-color: rgba(102, 126, 234, 0.3);
+            transform: scale(1.02);
+        }
+
+        .milestone-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(102, 126, 234, 0.1);
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            border-radius: 20px;
+            font-size: 0.875rem;
+            margin-top: 1rem;
         }
 
         footer {
@@ -216,39 +248,196 @@
             border-top: 1px solid rgba(255, 255, 255, 0.05);
             margin-top: 5rem;
         }
+
+        footer p {
+            margin: 0.25rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 4rem 1.5rem 2rem;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .subtitle {
+                font-size: 1.25rem;
+            }
+
+            .description {
+                font-size: 1rem;
+            }
+
+            .timeline::before {
+                left: 20px;
+            }
+
+            .timeline-item,
+            .timeline-item:nth-child(even) {
+                flex-direction: row;
+            }
+
+            .timeline-content {
+                max-width: 100%;
+                padding-left: 60px;
+                padding-right: 0;
+            }
+
+            .timeline-item:nth-child(odd) .timeline-content,
+            .timeline-item:nth-child(even) .timeline-content {
+                text-align: left;
+            }
+
+            .timeline-marker {
+                left: 20px;
+            }
+
+            .timeline-card {
+                padding: 1.5rem;
+            }
+
+            .timeline-title {
+                font-size: 1.25rem;
+            }
+
+            .back-link {
+                top: 1rem;
+                left: 1rem;
+            }
+        }
     </style>
 </head>
 <body>
-
     <a href="/" class="back-link">
-        ← Back to Home
+        <span>←</span>
+        <span>Back to Home</span>
     </a>
 
     <div class="container">
         <div class="header">
             <h1>Our Journey</h1>
-            <p class="subtitle">
-                <span id="years-count"></span> Years of Innovation & Growth
-            </p>
-            <p class="description">
-                From a vision to reality, explore the key milestones that have shaped ASCAPcT.
-            </p>
+            <p class="subtitle">7+ Years of Innovation & Growth</p>
+            <p class="description">From a vision to reality, explore the key milestones that have shaped ASCAPcT into the trusted venture capital firm it is today.</p>
         </div>
 
-        <!-- timeline unchanged -->
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <div class="timeline-card">
+                        <div class="timeline-date">February 23, 2018</div>
+                        <img src="/timeline/2018-08.png" alt="ASCAPcT Foundation 2018" class="timeline-image">
+                        <h3 class="timeline-title">ASCAPcT Founded</h3>
+                        <p class="timeline-description">The journey begins. ASCAPcT.com domain secured with a vision to build tomorrow's enterprises through strategic investments and innovation.</p>
+                        <div class="milestone-badge">
+                            <span>🚀</span>
+                            <span>Foundation</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <div class="timeline-card">
+                        <div class="timeline-date">2018-2019</div>
+                        <img src="/timeline/2019-05.png" alt="Building Foundation 2019" class="timeline-image">
+                        <h3 class="timeline-title">Building the Foundation</h3>
+                        <p class="timeline-description">Established core investment principles and began identifying key opportunities in emerging technology sectors.</p>
+                        <div class="milestone-badge">
+                            <span>🏗️</span>
+                            <span>Strategy Development</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <div class="timeline-card">
+                        <div class="timeline-date">2020</div>
+                        <img src="/timeline/2021-12.png" alt="Portfolio Expansion 2020" class="timeline-image">
+                        <h3 class="timeline-title">First Portfolio Expansion</h3>
+                        <p class="timeline-description">Launched strategic initiatives and expanded our portfolio with carefully selected ventures focused on sustainable growth.</p>
+                        <div class="milestone-badge">
+                            <span>📈</span>
+                            <span>Growth Phase</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <div class="timeline-card">
+                        <div class="timeline-date">2021-2022</div>
+                        <img src="/timeline/2021-04.png" alt="Innovation 2021" class="timeline-image">
+                        <h3 class="timeline-title">Innovation & Adaptation</h3>
+                        <p class="timeline-description">Navigated global challenges while maintaining focus on innovation. Strengthened partnerships and refined investment strategies.</p>
+                        <div class="milestone-badge">
+                            <span>💡</span>
+                            <span>Innovation</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <div class="timeline-card">
+                        <div class="timeline-date">2023</div>
+                        <img src="/timeline/2023-07.png" alt="Digital Transformation 2023" class="timeline-image">
+                        <h3 class="timeline-title">Digital Transformation</h3>
+                        <p class="timeline-description">Enhanced our digital presence and investment frameworks to align with evolving market dynamics and emerging technologies.</p>
+                        <div class="milestone-badge">
+                            <span>🔄</span>
+                            <span>Transformation</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <div class="timeline-card">
+                        <div class="timeline-date">2024</div>
+                        <h3 class="timeline-title">Reaching New Heights</h3>
+                        <p class="timeline-description">Celebrated 6 years of excellence with expanded portfolio reach and strengthened commitment to fostering innovative enterprises.</p>
+                        <div class="milestone-badge">
+                            <span>🏆</span>
+                            <span>Milestone</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <div class="timeline-card">
+                        <div class="timeline-date">2025 & Beyond</div>
+                        <h3 class="timeline-title">Future Vision</h3>
+                        <p class="timeline-description">Continuing our mission to identify and nurture groundbreaking ventures. Committed to building tomorrow's success stories through strategic partnerships and investments.</p>
+                        <div class="milestone-badge">
+                            <span>✨</span>
+                            <span>Future Forward</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <footer>
         <p>A trusted name since February 2018</p>
         <p>© 2018-2025 ASCAPcT. All rights reserved.</p>
     </footer>
-
-    <script>
-        const startYear = 2018;
-        const yearsPassed = new Date().getFullYear() - startYear;
-        document.getElementById('years-count').textContent = yearsPassed + "+";
-    </script>
-
 </body>
 </html>
